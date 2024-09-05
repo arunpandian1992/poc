@@ -21,6 +21,11 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@pipeline().parameters.parameter_ds_dir_in",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -30,7 +35,8 @@
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "PreserveHierarchy"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
@@ -92,13 +98,16 @@
 		],
 		"parameters": {
 			"parameter_ds_system": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "poc"
 			},
 			"parameter_ds_dir_in": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "landing"
 			},
 			"parameter_ds_dir_out": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "staging"
 			},
 			"parameter_ds_filename": {
 				"type": "string"
