@@ -79,14 +79,14 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "pocparameter_ds",
+						"referenceName": "poc_sink_ds",
 						"type": "DatasetReference",
 						"parameters": {
-							"System": {
+							"sys": {
 								"value": "@pipeline().parameters.parameter_ds_system",
 								"type": "Expression"
 							},
-							"input": {
+							"dir": {
 								"value": "@pipeline().parameters.parameter_ds_dir_out",
 								"type": "Expression"
 							},
