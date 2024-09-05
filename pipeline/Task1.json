@@ -27,16 +27,83 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "pocparameter_ds",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"System": {
+								"value": "@pipeline().parameters.parameter_ds_system",
+								"type": "Expression"
+							},
+							"input": {
+								"value": "@pipeline().parameters.parameter_ds_dir_in",
+								"type": "Expression"
+							},
+							"filename": {
+								"value": "@pipeline().parameters.parameter_ds_filename",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "pocparameter_ds",
+						"type": "DatasetReference",
+						"parameters": {
+							"System": {
+								"value": "@pipeline().parameters.parameter_ds_system",
+								"type": "Expression"
+							},
+							"input": {
+								"value": "@pipeline().parameters.parameter_ds_dir_out",
+								"type": "Expression"
+							},
+							"filename": {
+								"value": "@pipeline().parameters.parameter_ds_filename",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"parameter_ds_system": {
+				"type": "string"
+			},
+			"parameter_ds_dir_in": {
+				"type": "string"
+			},
+			"parameter_ds_dir_out": {
+				"type": "string"
+			},
+			"parameter_ds_filename": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "POC"
 		},
