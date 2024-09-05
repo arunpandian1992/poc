@@ -1,0 +1,28 @@
+{
+	"name": "Task1",
+	"properties": {
+		"description": "to extract all the items from zip file and place it in staging layer",
+		"activities": [
+			{
+				"name": "landing to staging",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			}
+		],
+		"folder": {
+			"name": "POC"
+		},
+		"annotations": []
+	}
+}
