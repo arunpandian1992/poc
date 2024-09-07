@@ -99,7 +99,7 @@
 				]
 			},
 			{
-				"name": "Task2",
+				"name": "Staging to Raw layer",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
@@ -126,11 +126,11 @@
 				}
 			},
 			{
-				"name": "Notebook1",
+				"name": "Raw layer to schema layer",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Task2",
+						"activity": "Staging to Raw layer",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -153,11 +153,11 @@
 				}
 			},
 			{
-				"name": "Notebook2",
+				"name": "Reports in Gold layer",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Notebook1",
+						"activity": "Raw layer to schema layer",
 						"dependencyConditions": [
 							"Succeeded"
 						]
